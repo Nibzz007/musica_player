@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
 import 'package:musica_player/models/db_functions/db_function.dart';
 import 'package:musica_player/models/songs.dart';
 import 'package:musica_player/palettes/color_palette.dart';
@@ -9,16 +8,13 @@ import 'package:musica_player/screens/screen_favourite.dart';
 class CustomPlayList extends StatelessWidget {
   const CustomPlayList({
     Key? key,
-    //required this.playlistImage,
     required this.playlistName,
   }) : super(key: key);
-
-  //final String playlistImage;
+  
   final String playlistName;
 
   @override
   Widget build(BuildContext context) {
-    final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
     final List<Songs> songList =
         getPlaylistBox().get(playlistName)!.toList().cast<Songs>();
@@ -59,7 +55,6 @@ class CustomPlayList extends StatelessWidget {
             ),
             height: 150,
             margin: const EdgeInsets.only(right: 10),
-            // width: 120,
             width: screenWidth * 0.35,
             child: Center(
               child: Padding(
@@ -95,42 +90,7 @@ class CustomPlayList extends StatelessWidget {
                 ),
               ),
             ),
-            // ClipRRect(
-            //   borderRadius: BorderRadius.circular(18),
-            //   child: Image.asset(
-            //     assets/images/36485F.jpeg,
-            //     fit: BoxFit.cover,
-            //     // height: 137,
-            //     height: screenHeight * 0.21,
-            //   ),
-            // ),
           ),
-
-          // Positioned(
-          //   bottom: 12,
-          //   left: 7,
-          //   child: Column(
-          //     crossAxisAlignment: CrossAxisAlignment.start,
-          //     children: [
-          //       // Text(
-          //       //   playlistName,
-          //       //   maxLines: 1,
-          //       //   overflow: TextOverflow.ellipsis,
-          //       //   style: const TextStyle(
-          //       //     fontSize: 15,
-          //       //     fontWeight: FontWeight.w600,
-          //       //   ),
-          //       // ),
-          //       Text(
-          //         ' ${songList.length} Songs',
-          //         style: const TextStyle(
-          //           color: kLightBlue,
-          //           fontSize: 13,
-          //         ),
-          //       )
-          //     ],
-          //   ),
-          // ),
         ],
       ),
     );

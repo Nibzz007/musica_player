@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:musica_player/models/db_functions/db_function.dart';
 import 'package:musica_player/models/songs.dart';
-import 'package:musica_player/palettes/color_palette.dart';
 
 class UserPlaylist {
   static final Box<List> playlistBox = getPlaylistBox();
@@ -62,7 +61,9 @@ class UserPlaylist {
       SnackBar(
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
+          ),
         ),
         duration: const Duration(seconds: 1),
         backgroundColor: Theme.of(context).backgroundColor,

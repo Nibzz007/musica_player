@@ -3,9 +3,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:musica_player/functions/alert_functions.dart';
 import 'package:musica_player/models/db_functions/db_function.dart';
 import 'package:musica_player/models/songs.dart';
-import 'package:musica_player/palettes/color_palette.dart';
 import 'package:musica_player/widgets/created_playlist.dart';
-import 'package:musica_player/widgets/custom_playlist.dart';
 
 class ScreenPlaylist extends StatelessWidget {
   ScreenPlaylist({super.key});

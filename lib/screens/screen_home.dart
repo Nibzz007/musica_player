@@ -6,7 +6,6 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:musica_player/functions/alert_functions.dart';
 import 'package:musica_player/models/db_functions/db_function.dart';
 import 'package:musica_player/models/songs.dart';
-import 'package:musica_player/palettes/color_palette.dart';
 import 'package:musica_player/screens/screen_search.dart';
 import 'package:musica_player/widgets/custom_playlist.dart';
 import 'package:musica_player/widgets/song_list_tile.dart';
@@ -21,21 +20,6 @@ class ScreenHome extends StatefulWidget {
 }
 
 class _ScreenHomeState extends State<ScreenHome> {
-  // String greeting() {
-  //   var hour = DateTime.now().hour;
-  //   if (hour < 12) {
-  //     return 'Good Morning !';
-  //   }
-  //   if (hour < 16) {
-  //     return 'Good Afternoon !';
-  //   }
-  //   if (hour < 19) {
-  //     return 'Good Evening !';
-  //   }
-
-  //   return 'Good Night !';
-  // }
-
   Box<Songs> songBox = getSongBox();
   Box<List> playlistBox = getPlaylistBox();
 

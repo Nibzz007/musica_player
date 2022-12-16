@@ -8,7 +8,6 @@ import 'package:musica_player/functions/playlist.dart';
 import 'package:musica_player/models/db_functions/db_function.dart';
 import 'package:musica_player/models/songs.dart';
 import 'package:musica_player/palettes/color_palette.dart';
-import 'package:musica_player/screens/screen_now_playing.dart';
 import 'package:musica_player/widgets/search_widget.dart';
 import 'package:musica_player/widgets/song_list_tile.dart';
 

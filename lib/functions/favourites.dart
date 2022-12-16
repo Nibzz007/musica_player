@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:musica_player/models/db_functions/db_function.dart';
 import 'package:musica_player/models/songs.dart';
-import 'package:musica_player/palettes/color_palette.dart';
 
 class Favourites {
   static final Box<List> playlistBox = getPlaylistBox();

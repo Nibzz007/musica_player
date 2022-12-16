@@ -9,7 +9,6 @@ class ChangeThemeButtonWidget extends StatelessWidget {
     final themeProvider = Provider.of<ThemeProvider>(context);
     return Switch.adaptive(
       inactiveThumbColor: kLightBlue,
-      
       value: themeProvider.isDarkMode,
       onChanged: ((value) {
         final provider = Provider.of<ThemeProvider>(context,listen: false);

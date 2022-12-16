@@ -27,14 +27,11 @@ class _ScreenSplashState extends State<ScreenSplash> {
 
   @override
   void initState() {
-    //requestPermission();
+
     fetchSongs();
     super.initState();
+    
   }
-
-  // Future<void> requestPermission() async {
-  //   await Permission.storage.request();
-  // }
 
   Future fetchSongs() async {
     await Permission.storage.request();

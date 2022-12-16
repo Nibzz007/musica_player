@@ -1,7 +1,5 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'dart:ui';
-
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -20,7 +18,7 @@ showMiniPlayer({
   required AssetsAudioPlayer audioPlayer,
 }) {
   return showBottomSheet(
-      //backgroundColor: Colors.transparent,
+
       context: context,
       builder: (ctx) {
         return MiniPlayer(
@@ -53,19 +51,13 @@ showPlaylistModalSheet({
                 onPressed: () {
                   showCreatingPlaylistDialoge(context: ctx);
                 },
-                // icon: const Icon(
-                //   Icons.playlist_add,
-                //   color: kDarkBlue,
-                // ),
-                child: const Text(
-                  'Create Playlist',
-                  style: TextStyle(color: kDarkBlue),
-                ),
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.all(10),
                   backgroundColor: kLightBlue,
-
-                  //shape:  StadiumBorder(),
+                ),
+                child: const Text(
+                  'Create Playlist',
+                  style: TextStyle(color: kDarkBlue),
                 ),
               ),
               ValueListenableBuilder(
@@ -109,10 +101,6 @@ showPlaylistModalSheet({
                                       width: 50,
                                       fit: BoxFit.cover,
                                     ),
-                                    // const Text(
-                                    //   '🎧',
-                                    //   style: TextStyle(fontSize: 20),
-                                    // ),
                                     title: Text(playlistKey),
                                   ),
                                 );
