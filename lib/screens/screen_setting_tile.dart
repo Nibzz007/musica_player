@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:musica_player/texts/privacy.dart';
-import 'package:musica_player/texts/terms_and_conditions.dart';
+import 'package:musica_player/palettes/color_palette.dart';
+import '../texts/privacy.dart';
+import '../texts/terms_and_conditions.dart';
 
 class ScreenSettingTile extends StatelessWidget {
-  ScreenSettingTile({super.key, required this.screenName});
+  ScreenSettingTile({
+    super.key,
+    required this.screenName,
+  });
   final String screenName;
   String? screenContent;
 
@@ -15,9 +19,9 @@ class ScreenSettingTile extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back_ios,
-            color: Theme.of(context).backgroundColor,
+            color: kWhite,
           ),
           onPressed: () {
             Navigator.pop(context);
@@ -28,10 +32,10 @@ class ScreenSettingTile extends StatelessWidget {
         elevation: 0,
         title: Text(
           screenName,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 21,
             fontWeight: FontWeight.w600,
-            color: Theme.of(context).backgroundColor
+            color: kWhite,
           ),
         ),
       ),

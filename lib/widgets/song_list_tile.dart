@@ -1,22 +1,23 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:musica_player/functions/alert_functions.dart';
-import 'package:musica_player/functions/favourites.dart';
-import 'package:musica_player/functions/recents.dart';
-import 'package:musica_player/models/db_functions/db_function.dart';
-import 'package:musica_player/models/songs.dart';
+import 'package:musica_player/palettes/color_palette.dart';
 import 'package:on_audio_query/on_audio_query.dart';
+import '../functions/alert_functions.dart';
+import '../functions/db_functions.dart';
+import '../functions/favourites.dart';
+import '../functions/recents.dart';
+import '../models/songs.dart';
 
 class SongListTile extends StatefulWidget {
   const SongListTile({
-    Key? key,
+    super.key,
     this.icon = Icons.playlist_add,
     required this.onPressed,
-    required this.songList,
     required this.index,
     required this.audioPlayer,
-  }) : super(key: key);
+    required this.songList,
+  });
 
   final IconData icon;
   final void Function()? onPressed;
@@ -76,6 +77,7 @@ class _SongListTileState extends State<SongListTile> {
         style: const TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.w500,
+          color: kWhite
         ),
       ),
       subtitle: Text(
@@ -86,6 +88,7 @@ class _SongListTileState extends State<SongListTile> {
         maxLines: 1,
         style: const TextStyle(
           fontSize: 13,
+          color: kWhite
         ),
       ),
       trailing: Row(
@@ -96,7 +99,7 @@ class _SongListTileState extends State<SongListTile> {
             onPressed: widget.onPressed,
             icon: Icon(
               widget.icon,
-              color: Theme.of(context).backgroundColor,
+              color: kWhite,
               size: 27,
             ),
           ),
@@ -116,7 +119,7 @@ class _SongListTileState extends State<SongListTile> {
               Favourites.isThisFavourite(
                 id: widget.songList[widget.index].id,
               ),
-              color: Theme.of(context).backgroundColor,
+              color: kWhite,
               size: 25,
             ),
           )

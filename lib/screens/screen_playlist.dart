@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:musica_player/functions/alert_functions.dart';
-import 'package:musica_player/models/db_functions/db_function.dart';
-import 'package:musica_player/models/songs.dart';
-import 'package:musica_player/widgets/created_playlist.dart';
+import 'package:musica_player/palettes/color_palette.dart';
+import '../functions/alert_functions.dart';
+import '../functions/db_functions.dart';
+import '../models/songs.dart';
+import '../widgets/created_playlist.dart';
 
 class ScreenPlaylist extends StatelessWidget {
   ScreenPlaylist({super.key});
@@ -12,7 +13,6 @@ class ScreenPlaylist extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenHeight = MediaQuery.of(context).size.height;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -25,25 +25,26 @@ class ScreenPlaylist extends StatelessWidget {
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.w600,
-                
+                color: kWhite,
               ),
             ),
             GestureDetector(
               onTap: () {
                 showCreatingPlaylistDialoge(context: context);
               },
-              child: Icon(
+              child: const Icon(
                 Icons.add,
-                color: Theme.of(context).backgroundColor,
+                color: kWhite,
                 size: 27,
               ),
             )
           ],
         ),
-        SizedBox(height: 10,),
+        const SizedBox(
+          height: 10,
+        ),
         Expanded(
-          child: 
-          ListView(
+          child: ListView(
             children: [
               const SizedBox(height: 15),
               ValueListenableBuilder(
@@ -55,7 +56,10 @@ class ScreenPlaylist extends StatelessWidget {
                   keys.removeWhere((key) => key == 'Most Played');
                   return (keys.isEmpty)
                       ? const Center(
-                          child: Text('No Created Playlist..'),
+                          child: Text(
+                            'No Created Playlist..',
+                            style: TextStyle(color: kWhite),
+                          ),
                         )
                       : GridView.builder(
                           itemCount: keys.length,
@@ -79,7 +83,8 @@ class ScreenPlaylist extends StatelessWidget {
                             final int songListlength = songList.length;
 
                             return CreatedPlaylist(
-                              playlistImage: 'assets/images/f0be1125eec0fe3b841cb5ed3d951bbc.jpg',
+                              playlistImage:
+                                  'assets/images/f0be1125eec0fe3b841cb5ed3d951bbc.jpg',
                               playlistName: playlistName,
                               playlistSongNum: '$songListlength Songs',
                             );

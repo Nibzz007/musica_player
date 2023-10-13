@@ -1,12 +1,12 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:musica_player/functions/alert_functions.dart';
-import 'package:musica_player/models/db_functions/db_function.dart';
-
-import 'package:musica_player/models/songs.dart';
-import 'package:musica_player/widgets/search_widget.dart';
-import 'package:musica_player/widgets/song_list_tile.dart';
+import 'package:musica_player/palettes/color_palette.dart';
+import '../functions/alert_functions.dart';
+import '../functions/db_functions.dart';
+import '../models/songs.dart';
+import '../widgets/search_widget.dart';
+import '../widgets/song_list_tile.dart';
 
 class ScreenSearch extends StatefulWidget {
   const ScreenSearch({super.key, required this.audioPlayer});
@@ -43,12 +43,12 @@ class _ScreenSearchState extends State<ScreenSearch> {
     final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Search',
           style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.w600,
-            color: Theme.of(context).backgroundColor
+            color: kWhite,
           ),
         ),
         centerTitle: true,

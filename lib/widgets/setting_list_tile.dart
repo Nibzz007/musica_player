@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:musica_player/palettes/color_palette.dart';
+import '../palettes/color_palette.dart';
 
 class SettingListTile extends StatelessWidget {
   const SettingListTile({
@@ -21,13 +21,14 @@ class SettingListTile extends StatelessWidget {
       onTap: onTap,
       leading: Icon(
         icon,
-        color: kLightBlue,
+        color: kWhite,
         size: 22.5,
       ),
       title: Text(
         labeltext,
         style: const TextStyle(
           fontSize: 17,
+          color: kWhite
         ),
       ),
       trailing: (trailingWidget == null) ? const SizedBox() : trailingWidget,

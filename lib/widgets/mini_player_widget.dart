@@ -1,20 +1,20 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
-import 'package:musica_player/functions/recents.dart';
-import 'package:musica_player/models/songs.dart';
-import 'package:musica_player/palettes/color_palette.dart';
-import 'package:musica_player/screens/screen_now_playing.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:text_scroll/text_scroll.dart';
+import '../functions/recents.dart';
+import '../models/songs.dart';
+import '../palettes/color_palette.dart';
+import '../screens/screen_now_playing.dart';
 
 class MiniPlayer extends StatefulWidget {
   const MiniPlayer({
-    Key? key,
+    super.key,
     required this.songList,
     required this.index,
     required this.audioPlayer,
-  }) : super(key: key);
+  });
 
   final List<Songs> songList;
   final int index;
@@ -79,18 +79,10 @@ class _MiniPlayerState extends State<MiniPlayer> {
 
         return Container(
           padding: const EdgeInsets.symmetric(horizontal: 10),
-          // height: 75,
           height: screenHeight * 0.075,
           width: double.infinity,
           decoration: BoxDecoration(
-            color: Theme.of(context).primaryColor,
-            //mColor,
-            // kBlue,
-            borderRadius: BorderRadius.circular(10.0),
-            border: Border.all(
-              color: kLightBlue,
-              width: 1.5,
-            ),
+            color: bottomSheetBackgroundColor,
           ),
           child: Center(
             child: ListTile(
@@ -98,75 +90,81 @@ class _MiniPlayerState extends State<MiniPlayer> {
                 Navigator.push(
                   context,
                   PageTransition(
-                      duration: const Duration(milliseconds: 300),
-                      reverseDuration: const Duration(milliseconds: 300),
-                      child: ScreenNowPlaying(
-                        songList: songAudio,
-                        index: widget.index,
-                        id: myAudio.metas.id!,
-                        audioPlayer: widget.audioPlayer,
-                      ),
-                      type: PageTransitionType.bottomToTop),
+                    duration: const Duration(milliseconds: 300),
+                    reverseDuration: const Duration(milliseconds: 300),
+                    child: ScreenNowPlaying(
+                      songList: songAudio,
+                      index: widget.index,
+                      id: myAudio.metas.id!,
+                      audioPlayer: widget.audioPlayer,
+                    ),
+                    type: PageTransitionType.bottomToTop,
+                  ),
                 );
               },
               contentPadding: EdgeInsets.zero,
               leading: QueryArtworkWidget(
-                  artworkBorder: BorderRadius.circular(10),
-                  id: int.parse(myAudio.metas.id!),
-                  type: ArtworkType.AUDIO,
-                  nullArtworkWidget: ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Image.asset(
-                      'assets/images/musicHome.png',
-                      fit: BoxFit.cover,
-                      height: 50,
-                      width: 50,
-                    ),
-                  )),
+                artworkBorder: BorderRadius.circular(10),
+                id: int.parse(myAudio.metas.id!),
+                type: ArtworkType.AUDIO,
+                nullArtworkWidget: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image.asset(
+                    'assets/images/musicHome.png',
+                    fit: BoxFit.cover,
+                    height: 50,
+                    width: 50,
+                  ),
+                ),
+              ),
               title: TextScroll(
                 widget.audioPlayer.getCurrentAudioTitle,
                 velocity: const Velocity(pixelsPerSecond: Offset(40, 0)),
-                style:
-                    const TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+                style: const TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w600,
+                  color: kWhite
+                ),
               ),
               trailing: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   GestureDetector(
-                      onTap: playing.index == 0
-                          ? () {}
-                          : () async {
-                              await widget.audioPlayer.previous();
-                            },
-                      child: playing.index == 0
-                          ? Icon(
-                              Icons.skip_previous,
-                              color: kWhiteOpacity,
-                              size: 33,
-                            )
-                          : Icon(
-                              Icons.skip_previous,
-                              size: 33,
-                              color: Theme.of(context).backgroundColor,
-                            )),
+                    onTap: playing.index == 0
+                        ? () {}
+                        : () async {
+                            await widget.audioPlayer.previous();
+                          },
+                    child: playing.index == 0
+                        ? Icon(
+                            Icons.skip_previous,
+                            color: kWhiteOpacity,
+                            size: 33,
+                          )
+                        : const Icon(
+                            Icons.skip_previous,
+                            size: 33,
+                            color: kWhite,
+                          ),
+                  ),
                   const SizedBox(width: 15),
                   GestureDetector(
                     onTap: () async {
                       await widget.audioPlayer.playOrPause();
                     },
                     child: PlayerBuilder.isPlaying(
-                        player: widget.audioPlayer,
-                        builder: (context, isPlaying) {
-                          return Icon(
-                              isPlaying == true
-                                  ? Icons.pause
-                                  : Icons.play_arrow,
-                              color: Theme.of(context).backgroundColor,
-                              size: 33,
-                              shadows: const [
-                                Shadow(color: Colors.white, blurRadius: 10)
-                              ]);
-                        }),
+                      player: widget.audioPlayer,
+                      builder: (context, isPlaying) {
+                        return Icon(
+                          isPlaying == true ? Icons.pause : Icons.play_arrow,
+                          color: kWhite,
+                          size: 33,
+                          shadows: const [
+                            Shadow(color: Colors.white, blurRadius: 10)
+                          ],
+                        );
+                      },
+                    ),
                   ),
                   const SizedBox(width: 15),
                   GestureDetector(
@@ -181,10 +179,10 @@ class _MiniPlayerState extends State<MiniPlayer> {
                             color: kWhiteOpacity,
                             size: 33,
                           )
-                        : Icon(
+                        : const Icon(
                             Icons.skip_next,
                             size: 33,
-                            color: Theme.of(context).backgroundColor,
+                            color: kWhite,
                           ),
                   ),
                 ],

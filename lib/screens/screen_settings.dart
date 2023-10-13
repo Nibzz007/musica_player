@@ -1,13 +1,10 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
-import 'package:musica_player/palettes/color_palette.dart';
 import 'package:musica_player/screens/screen_navigation.dart';
-import 'package:musica_player/screens/screen_setting_tile.dart';
 import 'package:musica_player/widgets/setting_list_tile.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../class/changeTheme.dart';
+import '../palettes/color_palette.dart';
 
 const String NOTIFICATION = 'NOTIFICATION';
 
@@ -20,11 +17,6 @@ class ScreenSetting extends StatefulWidget {
 
 class _ScreenSettingState extends State<ScreenSetting> {
   AssetsAudioPlayer audioPlayer = AssetsAudioPlayer.withId('0');
-
-  @override
-  void initState() {
-    super.initState();
-  }
 
   Future<void> setNotification(bool newValue) async {
     setState(() {
@@ -52,6 +44,7 @@ class _ScreenSettingState extends State<ScreenSetting> {
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.w600,
+                  color: kWhite
                 ),
               ),
               const SizedBox(height: 15),
@@ -75,48 +68,16 @@ class _ScreenSettingState extends State<ScreenSetting> {
                 },
               ),
               SettingListTile(
-                labeltext: 'Light and Dark theme',
-                icon: Icons.dark_mode,
-                onTap: () {
-                 
-                },
-                trailingWidget: ChangeThemeButtonWidget(),
-              ),
-              SettingListTile(
                 labeltext: 'Notifications',
                 icon: Icons.notifications,
                 trailingWidget: Switch(
-                  inactiveThumbColor: kLightBlue,
+                  activeColor: kWhite,
+                  inactiveTrackColor: bottomSheetBackgroundColor,
                   value: SWITCHVALUE!,
-                  onChanged: (newValue) async {
-                    setNotification(newValue);
+                  onChanged: (value) {
+                    setNotification(value);
                   },
                 ),
-              ),
-              SettingListTile(
-                labeltext: 'Privacy Policy',
-                icon: Icons.security,
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) {
-                      return ScreenSettingTile(screenName: 'Privacy Policy');
-                    }),
-                  );
-                },
-              ),
-              SettingListTile(
-                labeltext: 'Terms and Conditions',
-                icon: Icons.security,
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) {
-                      return ScreenSettingTile(
-                          screenName: 'Terms and Conditions');
-                    }),
-                  );
-                },
               ),
               SettingListTile(
                 labeltext: 'License',
@@ -129,20 +90,21 @@ class _ScreenSettingState extends State<ScreenSetting> {
                         return Theme(
                           data: ThemeData(
                             textTheme: const TextTheme(
-                              bodyText2: TextStyle(
+                              bodyMedium: TextStyle(
                                 color: Colors.white,
                                 fontFamily: 'Poppins',
                               ),
-                              subtitle1: TextStyle(
+                              titleMedium: TextStyle(
                                 color: Colors.white,
                                 fontFamily: 'Poppins',
                               ),
-                              caption: TextStyle(
-                                color: kLightBlue,
+                              bodySmall: TextStyle(
+                                color: kWhite,
                                 fontFamily: 'Poppins',
                               ),
-                              headline6: TextStyle(
+                              titleLarge: TextStyle(
                                 fontFamily: 'Poppins',
+                                color: kWhite
                               ),
                             ),
                             cardColor: kBackgroundColor,
@@ -163,35 +125,16 @@ class _ScreenSettingState extends State<ScreenSetting> {
               ),
             ],
           ),
-        ),
-        Column(
-          children: const [
-            Text(
-              'Version',
-              style: TextStyle(
-                color: kLightBlue,
-                fontSize: 16,
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(bottom: 8.0),
-              child: Text(
-                '1.0.0',
-                style: TextStyle(
-                  color: kLightBlue,
-                  fontSize: 16,
-                ),
-              ),
-            ),
-          ],
-        ),
+        )
       ],
     );
   }
 }
 
-showAboutMeDialoge(
-    {required BuildContext context, required double screenHeight}) {
+showAboutMeDialoge({
+  required BuildContext context,
+  required double screenHeight,
+}) {
   showDialog(
       context: context,
       builder: (ctx) {
@@ -200,13 +143,13 @@ showAboutMeDialoge(
           child: Container(
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(20),
             ),
-            height: 200,
-            child: Padding(
-              padding: const EdgeInsets.all(10.0),
+            height: 180,
+            child: const Padding(
+              padding: EdgeInsets.all(10.0),
               child: Column(
-                children: const [
+                children: [
                   Text(
                     'About Me',
                     style: TextStyle(

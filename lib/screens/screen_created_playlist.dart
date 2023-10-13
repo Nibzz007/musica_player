@@ -1,18 +1,20 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:musica_player/functions/alert_functions.dart';
-import 'package:musica_player/functions/playlist.dart';
-import 'package:musica_player/models/db_functions/db_function.dart';
-import 'package:musica_player/models/songs.dart';
-import 'package:musica_player/palettes/color_palette.dart';
-import 'package:musica_player/widgets/search_widget.dart';
-import 'package:musica_player/widgets/song_list_tile.dart';
+import '../functions/alert_functions.dart';
+import '../functions/db_functions.dart';
+import '../functions/playlist_functions.dart';
+import '../models/songs.dart';
+import '../palettes/color_palette.dart';
+import '../widgets/search_widget.dart';
+import '../widgets/song_list_tile.dart';
 
 class ScreenCreatedPlaylist extends StatefulWidget {
-  const ScreenCreatedPlaylist({super.key, required this.playlistName});
+  const ScreenCreatedPlaylist({
+    super.key,
+    required this.playlistName,
+  });
+
   final String playlistName;
 
   @override
@@ -37,9 +39,9 @@ class _ScreenCreatedPlaylistState extends State<ScreenCreatedPlaylist> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back_ios,
-            color: Theme.of(context).backgroundColor,
+            color: kWhite,
           ),
           onPressed: () {
             Navigator.pop(context);
@@ -50,10 +52,10 @@ class _ScreenCreatedPlaylistState extends State<ScreenCreatedPlaylist> {
         elevation: 0,
         title: Text(
           newPlaylistName!,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 21,
             fontWeight: FontWeight.w600,
-            color: Theme.of(context).backgroundColor
+            color: kWhite,
           ),
         ),
         actions: [
@@ -67,10 +69,9 @@ class _ScreenCreatedPlaylistState extends State<ScreenCreatedPlaylist> {
                 playlistSongs: playlistSongs,
               );
             },
-            icon: Icon(
+            icon: const Icon(
               Icons.edit,
-              color: Theme.of(context).backgroundColor,
-              
+              color: kWhite,
             ),
           ),
           IconButton(
@@ -81,10 +82,10 @@ class _ScreenCreatedPlaylistState extends State<ScreenCreatedPlaylist> {
                 playlistKey: newPlaylistName!,
               );
             },
-            icon: Icon(
+            icon: const Icon(
               Icons.add,
               size: 27,
-              color: Theme.of(context).backgroundColor,
+              color: kWhite,
             ),
           )
         ],
@@ -99,26 +100,28 @@ class _ScreenCreatedPlaylistState extends State<ScreenCreatedPlaylist> {
 
             if (songList.isEmpty) {
               return const Center(
-                child: Text('No Songs Found'),
+                child: Text(
+                  'No Songs Found',
+                  style: TextStyle(color: kWhite),
+                ),
               );
             }
             return ListView.builder(
               itemCount: songList.length,
               itemBuilder: (ctx, index) {
                 return SongListTile(
-                    icon: Icons.delete_outline_rounded,
-                    onPressed: () {
-                      UserPlaylist.deleteFromPlaylist(
-                        context: context,
-                        songId: songList[index].id,
-                        playlistName: newPlaylistName!,
-                      );
-
-                    },
-                    songList: songList,
-                    index: index,
-                    audioPlayer: audioPlayer
+                  icon: Icons.delete_outline_rounded,
+                  onPressed: () {
+                    UserPlaylist.deleteFromPlaylist(
+                      context: context,
+                      songId: songList[index].id,
+                      playlistName: newPlaylistName!,
                     );
+                  },
+                  songList: songList,
+                  index: index,
+                  audioPlayer: audioPlayer,
+                );
               },
             );
           },

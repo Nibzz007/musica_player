@@ -8,4 +8,6 @@ const Color kWhite = Colors.white;
 const Color kGrey = Colors.grey;
 Color kWhiteOpacity = Colors.white.withOpacity(0.4);
 const Color kBlack = Colors.black;
-Color mColor =  const Color.fromARGB(137, 140, 122, 122);
+Color mColor = const Color.fromARGB(137, 140, 122, 122);
+Color scaffoldBackgroundColor = const Color(0xff202123);
+Color bottomSheetBackgroundColor = const Color(0xff343541);

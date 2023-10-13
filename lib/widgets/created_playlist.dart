@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:musica_player/functions/alert_functions.dart';
-import 'package:musica_player/palettes/color_palette.dart';
-import 'package:musica_player/screens/screen_created_playlist.dart';
+import '../functions/alert_functions.dart';
+import '../palettes/color_palette.dart';
+import '../screens/screen_created_playlist.dart';
 
 class CreatedPlaylist extends StatelessWidget {
   const CreatedPlaylist({
@@ -28,7 +28,6 @@ class CreatedPlaylist extends StatelessWidget {
           ),
         );
       },
-  
       child: Stack(
         children: [
           ClipRRect(
@@ -36,7 +35,6 @@ class CreatedPlaylist extends StatelessWidget {
             child: Image.asset(
               playlistImage,
               fit: BoxFit.cover,
-              // height: 137,
               height: screenHeight * 0.21,
             ),
           ),
@@ -50,7 +48,10 @@ class CreatedPlaylist extends StatelessWidget {
                   splashRadius: 1,
                   iconSize: 20,
                   onPressed: () {
-                    showPlaylistDeleteAlert(context: context, key: playlistName);
+                    showPlaylistDeleteAlert(
+                      context: context,
+                      key: playlistName,
+                    );
                   },
                   icon: const Icon(
                     Icons.delete,
@@ -72,13 +73,17 @@ class CreatedPlaylist extends StatelessWidget {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
-                      fontSize: 20, fontWeight: FontWeight.w600, color: kWhite),
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600,
+                    color: kWhite,
+                    letterSpacing: 2
+                  ),
                 ),
                 Text(
                   playlistSongNum,
                   style: const TextStyle(
-                    color: kLightBlue,
-                    fontSize: 13,
+                    color: kWhite,
+                    fontSize: 11,
                   ),
                 )
               ],

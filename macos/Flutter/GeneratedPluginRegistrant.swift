@@ -7,9 +7,9 @@ import Foundation
 
 import assets_audio_player
 import assets_audio_player_web
-import path_provider_macos
+import path_provider_foundation
 import share_plus_macos
-import shared_preferences_macos
+import shared_preferences_foundation
 import url_launcher_macos
 import wakelock_macos
 

@@ -1,15 +1,13 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:musica_player/functions/playlist.dart';
-import 'package:musica_player/models/db_functions/db_function.dart';
-import 'package:musica_player/models/songs.dart';
-import 'package:musica_player/palettes/color_palette.dart';
-import 'package:musica_player/widgets/mini_player.dart';
-import 'package:musica_player/widgets/search_widget.dart';
+import 'package:musica_player/functions/db_functions.dart';
+import 'package:musica_player/functions/playlist_functions.dart';
 import 'package:on_audio_query/on_audio_query.dart';
+import '../models/songs.dart';
+import '../palettes/color_palette.dart';
+import '../widgets/mini_player_widget.dart';
+import '../widgets/search_widget.dart';
 
 showMiniPlayer({
   required BuildContext context,
@@ -18,7 +16,6 @@ showMiniPlayer({
   required AssetsAudioPlayer audioPlayer,
 }) {
   return showBottomSheet(
-
       context: context,
       builder: (ctx) {
         return MiniPlayer(
@@ -34,84 +31,93 @@ showPlaylistModalSheet({
   required double screenHeight,
   required Songs song,
 }) {
-  Box<List> playlistBox = getPlaylistBox();
+  Box<List> playListBox = getPlaylistBox();
   return showModalBottomSheet(
-      backgroundColor: Colors.transparent,
-      context: context,
-      builder: (ctx) {
-        return Container(
-          decoration: BoxDecoration(
-            color: Theme.of(context).primaryColor,
-          ),
-          height: screenHeight * 0.55,
-          child: Column(
-            children: [
-              const SizedBox(height: 10),
-              ElevatedButton(
-                onPressed: () {
-                  showCreatingPlaylistDialoge(context: ctx);
-                },
-                style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.all(10),
-                  backgroundColor: kLightBlue,
-                ),
-                child: const Text(
-                  'Create Playlist',
-                  style: TextStyle(color: kDarkBlue),
-                ),
+    context: context,
+    builder: (ctx) {
+      return Container(
+        decoration: BoxDecoration(
+          color: bottomSheetBackgroundColor,
+        ),
+        height: screenHeight * 0.55,
+        child: Column(
+          children: [
+            const SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: () {
+                showCreatingPlaylistDialoge(context: ctx);
+              },
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.all(10),
+                backgroundColor: kWhite,
               ),
-              ValueListenableBuilder(
-                  valueListenable: playlistBox.listenable(),
-                  builder: (context, boxSongList, _) {
-                    final List<dynamic> keys = playlistBox.keys.toList();
+              child: const Text(
+                'Create Playlist',
+                style: TextStyle(color: kBlack),
+              ),
+            ),
+            ValueListenableBuilder(
+                valueListenable: playListBox.listenable(),
+                builder: (context, boxSongList, _) {
+                  final List<dynamic> keys = playListBox.keys.toList();
 
-                    keys.removeWhere((key) => key == 'Favourites');
-                    keys.removeWhere((key) => key == 'Recent');
-                    keys.removeWhere((key) => key == 'Most Played');
+                  keys.removeWhere((key) => key == 'Favourites');
+                  keys.removeWhere((key) => key == 'Recent');
+                  keys.removeWhere((key) => key == 'Most Played');
 
-                    return Expanded(
-                      child: (keys.isEmpty)
-                          ? const Center(
-                              child: Text("No Playlist Found"),
-                            )
-                          : ListView.builder(
-                              itemCount: keys.length,
-                              itemBuilder: (ctx, index) {
-                                final String playlistKey = keys[index];
-
-                                return Container(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 2),
-                                  margin: const EdgeInsets.all(5),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                  child: ListTile(
-                                    onTap: () async {
-                                      UserPlaylist.addSongToPlaylist(
-                                          context: context,
-                                          songId: song.id,
-                                          playlistName: playlistKey);
-
-                                      Navigator.pop(context);
-                                    },
-                                    leading: Image.asset(
-                                      'assets/images/music logo design.png',
-                                      height: 50,
-                                      width: 50,
-                                      fit: BoxFit.cover,
-                                    ),
-                                    title: Text(playlistKey),
-                                  ),
-                                );
-                              },
+                  return Expanded(
+                    child: (keys.isEmpty)
+                        ? const Center(
+                            child: Text(
+                              "No Playlist Found",
+                              style: TextStyle(color: kWhite),
                             ),
-                    );
-                  })
-            ],
-          ),
-        );
-      });
+                          )
+                        : ListView.builder(
+                            itemCount: keys.length,
+                            itemBuilder: (ctx, index) {
+                              final String playlistKey = keys[index];
+
+                              return Container(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 2),
+                                margin: const EdgeInsets.all(5),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                child: ListTile(
+                                  onTap: () async {
+                                    UserPlaylist.addSongToPlaylist(
+                                        context: context,
+                                        songId: song.id,
+                                        playlistName: playlistKey);
+
+                                    Navigator.pop(context);
+                                  },
+                                  leading: Image.asset(
+                                    'assets/images/music logo design.png',
+                                    height: 50,
+                                    width: 50,
+                                    fit: BoxFit.cover,
+                                  ),
+                                  title: Text(
+                                    playlistKey,
+                                    style: const TextStyle(
+                                      color: kWhite,
+                                      letterSpacing: 1.3,
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                  );
+                })
+          ],
+        ),
+      );
+    },
+  );
 }
 
 showCreatingPlaylistDialoge({required BuildContext context}) {
@@ -136,7 +142,7 @@ showCreatingPlaylistDialoge({required BuildContext context}) {
           child: AlertDialog(
             backgroundColor: kWhite,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(5),
+              borderRadius: BorderRadius.circular(20),
             ),
             title: const Text(
               'Create playlist',
@@ -256,7 +262,7 @@ showSongModalSheet({
       final songBox = getSongBox();
       return Container(
         decoration: BoxDecoration(
-          color: Theme.of(context).primaryColor,
+          color: bottomSheetBackgroundColor,
         ),
         height: screenHeight * 0.55,
         child: Column(
@@ -269,6 +275,7 @@ showSongModalSheet({
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
+                color: kWhite,
               ),
             ),
             Expanded(
@@ -314,6 +321,7 @@ showSongModalSheet({
                             style: const TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.w500,
+                              color: kWhite
                             ),
                           ),
                         ),

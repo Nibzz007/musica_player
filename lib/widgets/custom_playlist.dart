@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:musica_player/models/db_functions/db_function.dart';
-import 'package:musica_player/models/songs.dart';
-import 'package:musica_player/palettes/color_palette.dart';
-import 'package:musica_player/screens/screen_created_playlist.dart';
-import 'package:musica_player/screens/screen_favourite.dart';
+import '../functions/db_functions.dart';
+import '../models/songs.dart';
+import '../palettes/color_palette.dart';
+import '../screens/screen_created_playlist.dart';
+import '../screens/screen_favourite.dart';
 
 class CustomPlayList extends StatelessWidget {
-  const CustomPlayList({
-    Key? key,
-    required this.playlistName,
-  }) : super(key: key);
-  
+  const CustomPlayList({super.key, required this.playlistName});
+
   final String playlistName;
 
   @override
@@ -51,7 +48,7 @@ class CustomPlayList extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
-              color: kBlue
+              color: bottomSheetBackgroundColor,
             ),
             height: 150,
             margin: const EdgeInsets.only(right: 10),
@@ -65,24 +62,24 @@ class CustomPlayList extends StatelessWidget {
                     Text(
                       playlistName,
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w900,
-                        color: Theme.of(context).backgroundColor,
+                        color: kWhite,
                       ),
                     ),
                     songList.length == 1
                         ? Text(
                             ' ${songList.length} Song',
-                            style:  TextStyle(
-                              color: Theme.of(context).backgroundColor,
+                            style: const TextStyle(
+                              color: kWhite,
                               fontSize: 13,
                             ),
                           )
                         : Text(
                             ' ${songList.length} Songs',
-                            style: TextStyle(
-                              color: Theme.of(context).backgroundColor,
+                            style: const TextStyle(
+                              color: kWhite,
                               fontSize: 13,
                             ),
                           ),

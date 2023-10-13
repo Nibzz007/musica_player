@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:musica_player/models/db_functions/db_function.dart';
-import 'package:musica_player/models/songs.dart';
+import 'package:musica_player/functions/db_functions.dart';
+import 'package:musica_player/palettes/color_palette.dart';
+
+import '../models/songs.dart';
 
 class Favourites {
   static final Box<List> playlistBox = getPlaylistBox();
@@ -19,6 +21,7 @@ class Favourites {
     if (favSongList.where((song) => song.id == favSong.id).isEmpty) {
       favSongList.add(favSong);
       await playlistBox.put('Favourites', favSongList);
+      // ignore: use_build_context_synchronously
       showFavouritesSnackBar(
           context: context,
           songName: favSong.title,
@@ -26,6 +29,7 @@ class Favourites {
     } else {
       favSongList.removeWhere((songs) => songs.id == favSong.id);
       await playlistBox.put('Favourites', favSongList);
+      // ignore: use_build_context_synchronously
       showFavouritesSnackBar(
           context: context,
           songName: favSong.title,
@@ -44,10 +48,11 @@ class Favourites {
         : Icons.favorite_rounded;
   }
 
-  static showFavouritesSnackBar(
-      {required BuildContext context,
-      required String songName,
-      required String message}) {
+  static showFavouritesSnackBar({
+    required BuildContext context,
+    required String songName,
+    required String message,
+  }) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         shape: const RoundedRectangleBorder(
@@ -57,7 +62,7 @@ class Favourites {
           ),
         ),
         duration: const Duration(seconds: 1),
-        backgroundColor: Theme.of(context).backgroundColor,
+        backgroundColor: bottomSheetBackgroundColor,
         content: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,

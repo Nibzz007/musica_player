@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:musica_player/palettes/color_palette.dart';
+import '../palettes/color_palette.dart';
 
 class SearchField extends StatelessWidget {
   const SearchField({
@@ -10,6 +10,7 @@ class SearchField extends StatelessWidget {
     required this.validator,
     this.onChanged,
   });
+
   final String hintText;
   final IconData icon;
   final TextEditingController textController;
@@ -27,7 +28,7 @@ class SearchField extends StatelessWidget {
         controller: textController,
         keyboardType: TextInputType.emailAddress,
         textInputAction: TextInputAction.done,
-        style: TextStyle(color: kBlack),
+        style: const TextStyle(color: kBlack),
         decoration: InputDecoration(
           // prefixIcon: Icon(
           //   icon,
@@ -35,13 +36,11 @@ class SearchField extends StatelessWidget {
           //   size: 25,
           // ),
           hintText: hintText,
-          hintStyle: const TextStyle(
-            color: kBlack
-            //kLightBlue,
-          ),
+          hintStyle: const TextStyle(color: kBlack
+              //kLightBlue,
+              ),
           filled: true,
-          fillColor: 
-          kWhite,
+          fillColor: kWhite,
           //const Color(0xFF153950),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
@@ -63,5 +62,3 @@ class SearchField extends StatelessWidget {
     );
   }
 }
-
-// 'Songs or Playlist..'

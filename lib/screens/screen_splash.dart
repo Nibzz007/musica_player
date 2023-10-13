@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:musica_player/models/db_functions/db_function.dart';
+import 'package:musica_player/functions/db_functions.dart';
 import 'package:musica_player/models/songs.dart';
 import 'package:musica_player/palettes/color_palette.dart';
 import 'package:musica_player/screens/screen_navigation.dart';
@@ -19,7 +19,7 @@ class ScreenSplash extends StatefulWidget {
 class _ScreenSplashState extends State<ScreenSplash> {
   OnAudioQuery audioQuery = OnAudioQuery();
 
-  Box<List> playlistBox = getPlaylistBox();
+  Box<List> playListBox = getPlaylistBox();
   Box<Songs> songBox = getSongBox();
 
   List<SongModel> deviceSongs = [];
@@ -27,10 +27,8 @@ class _ScreenSplashState extends State<ScreenSplash> {
 
   @override
   void initState() {
-
     fetchSongs();
     super.initState();
-    
   }
 
   Future fetchSongs() async {
@@ -43,7 +41,7 @@ class _ScreenSplashState extends State<ScreenSplash> {
     );
 
     for (var song in deviceSongs) {
-      if (song.fileExtension == 'mp3') {
+      if (song.fileExtension == "mp3") {
         fetchedSongs.add(song);
       }
     }
@@ -57,29 +55,13 @@ class _ScreenSplashState extends State<ScreenSplash> {
       );
       await songBox.put(song.id, song);
     }
-    //create a Favourite songs if it is not created
+
+    // Create Favorite songs if it is not created yet
+
     getFavSongs();
     getRecentSongs();
     getMostPlayedSongs();
-    gotoScreenHome(context);
-  }
-
-  Future getFavSongs() async {
-    if (!playlistBox.keys.contains('Favourites')) {
-      await playlistBox.put('Favourites', []);
-    }
-  }
-
-  Future getMostPlayedSongs() async {
-    if (!playlistBox.keys.contains('Most Played')) {
-      await playlistBox.put('Most Played', []);
-    }
-  }
-
-  Future getRecentSongs() async {
-    if (!playlistBox.keys.contains('Recent')) {
-      await playlistBox.put('Recent', []);
-    }
+    goToHome(context);
   }
 
   @override
@@ -88,21 +70,37 @@ class _ScreenSplashState extends State<ScreenSplash> {
       backgroundColor: kBlack,
       body: Center(
         child: Image.asset(
-          'assets/images/My project (2).png',
-          width: 200,
+          'assets/images/MusicApp (1).png',
+          width: 280,
+          height: 250,
         ),
       ),
     );
   }
 
-  Future<void> gotoScreenHome(BuildContext context) async {
+  Future<void> goToHome(BuildContext context) async {
     await Future.delayed(const Duration(seconds: 3));
-
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(
-        builder: (ctx) => const ScreenNavigation(),
-      ),
+      MaterialPageRoute(builder: (context) => const ScreenNavigation()),
     );
+  }
+
+  Future getMostPlayedSongs() async {
+    if (!playListBox.keys.contains('Most Played')) {
+      await playListBox.put('Most Played', []);
+    }
+  }
+
+  Future getRecentSongs() async {
+    if (!playListBox.keys.contains('Recent')) {
+      await playListBox.put('Recent', []);
+    }
+  }
+
+  Future getFavSongs() async {
+    if (!playListBox.keys.contains('Favourites')) {
+      await playListBox.put('Favourites', []);
+    }
   }
 }

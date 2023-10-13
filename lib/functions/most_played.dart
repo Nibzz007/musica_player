@@ -1,6 +1,6 @@
-import 'package:musica_player/models/db_functions/db_function.dart';
-import 'package:musica_player/models/songs.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import '../models/songs.dart';
+import 'db_functions.dart';
 
 class MostPlayed {
   static final Box<Songs> songBox = getSongBox();

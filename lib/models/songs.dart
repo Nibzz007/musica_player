@@ -17,6 +17,7 @@ class Songs extends HiveObject {
 
   @HiveField(4)
   int count;
+
   Songs({
     required this.id,
     required this.title,
