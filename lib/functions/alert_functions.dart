@@ -1,8 +1,8 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:musica_player/functions/db_functions.dart';
-import 'package:musica_player/functions/playlist_functions.dart';
+import 'package:music_player/functions/db_functions.dart';
+import 'package:music_player/functions/playlist_functions.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import '../models/songs.dart';
 import '../palettes/color_palette.dart';

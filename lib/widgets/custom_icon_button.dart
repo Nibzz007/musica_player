@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:musica_player/palettes/color_palette.dart';
+import 'package:music_player/palettes/color_palette.dart';
 
 class CustomIconButton extends StatelessWidget {
   const CustomIconButton({

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:musica_player/palettes/color_palette.dart';
+import 'package:music_player/palettes/color_palette.dart';
 import '../texts/privacy.dart';
 import '../texts/terms_and_conditions.dart';
 

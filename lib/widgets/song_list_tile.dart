@@ -1,7 +1,7 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:musica_player/palettes/color_palette.dart';
+import 'package:music_player/palettes/color_palette.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import '../functions/alert_functions.dart';
 import '../functions/db_functions.dart';

@@ -1,7 +1,7 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
-import 'package:musica_player/screens/screen_navigation.dart';
-import 'package:musica_player/widgets/setting_list_tile.dart';
+import 'package:music_player/screens/screen_navigation.dart';
+import 'package:music_player/widgets/setting_list_tile.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../palettes/color_palette.dart';

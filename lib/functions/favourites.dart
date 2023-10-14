@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:musica_player/functions/db_functions.dart';
-import 'package:musica_player/palettes/color_palette.dart';
+import 'package:music_player/functions/db_functions.dart';
+import 'package:music_player/palettes/color_palette.dart';
 
 import '../models/songs.dart';
 

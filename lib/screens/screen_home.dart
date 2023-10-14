@@ -1,10 +1,10 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:musica_player/functions/db_functions.dart';
-import 'package:musica_player/models/songs.dart';
-import 'package:musica_player/palettes/color_palette.dart';
-import 'package:musica_player/screens/screen_search.dart';
+import 'package:music_player/functions/db_functions.dart';
+import 'package:music_player/models/songs.dart';
+import 'package:music_player/palettes/color_palette.dart';
+import 'package:music_player/screens/screen_search.dart';
 import '../functions/alert_functions.dart';
 import '../widgets/custom_playlist.dart';
 import '../widgets/song_list_tile.dart';
